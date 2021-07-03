@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://monke_spritesheets/monke_spritesheet.png" type="Texture" id=1]
 [ext_resource path="res://Player.gd" type="Script" id=2]
@@ -8,11 +8,42 @@
 radius = 6.97476
 height = 11.1417
 
+[sub_resource type="Animation" id=12]
+resource_name = "catch"
+length = 0.4
+step = 0.025
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.025, 0.05, 0.075, 0.125, 0.175, 0.225, 0.275, 0.325, 0.375 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 16, 15, 14, 13, 12, 11, 10, 9, 8, 7 ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath("..")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.1 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "remove_catch_obj"
+} ]
+}
+
 [sub_resource type="Animation" id=9]
 length = 0.4
 step = 0.0666667
 tracks/0/type = "value"
-tracks/0/path = NodePath("Monke:frame")
+tracks/0/path = NodePath("../Monke:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -27,7 +58,7 @@ tracks/0/keys = {
 [sub_resource type="Animation" id=10]
 length = 0.2
 tracks/0/type = "value"
-tracks/0/path = NodePath("Monke:frame")
+tracks/0/path = NodePath("../Monke:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
@@ -40,62 +71,72 @@ tracks/0/keys = {
 }
 
 [sub_resource type="Animation" id=11]
-length = 0.6
+length = 0.733333
 step = 0.0666667
-tracks/0/type = "value"
-tracks/0/path = NodePath("Monke:frame")
+tracks/0/type = "method"
+tracks/0/path = NodePath("..")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.0666667, 0.133333, 0.2, 0.266667, 0.333333, 0.4, 0.466667, 0.533333 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
-"update": 1,
-"values": [ 8, 9, 10, 11, 12, 13, 14, 15, 7 ]
-}
-tracks/1/type = "method"
-tracks/1/path = NodePath("..")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0.333333 ),
+"times": PoolRealArray( 0.404038 ),
 "transitions": PoolRealArray( 1 ),
 "values": [ {
 "args": [  ],
 "method": "throw"
 } ]
 }
+tracks/1/type = "value"
+tracks/1/path = NodePath(".:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.0714653, 0.133333, 0.2, 0.266667, 0.333333, 0.4, 0.466667, 0.533333, 0.6, 0.656112 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 7 ]
+}
 
-[node name="Player" type="Node2D"]
+[sub_resource type="CircleShape2D" id=13]
+radius = 20.5045
+
+[node name="Player" type="KinematicBody2D"]
 script = ExtResource( 2 )
 Banan = ExtResource( 4 )
-
-[node name="KinematicBody2D" type="KinematicBody2D" parent="."]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="KinematicBody2D"]
-position = Vector2( 0, -4 )
-shape = SubResource( 8 )
-
-[node name="ThrowPoint" type="Position2D" parent="KinematicBody2D"]
-position = Vector2( 0, -30 )
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="KinematicBody2D"]
-anims/run = SubResource( 9 )
-anims/sit = SubResource( 10 )
-anims/throw = SubResource( 11 )
-
-[node name="Monke" type="Sprite" parent="KinematicBody2D"]
-texture = ExtResource( 1 )
-hframes = 6
-vframes = 3
-frame = 13
 
 [node name="ThrowCooldown" type="Timer" parent="."]
 wait_time = 4.0
 one_shot = true
 
-[connection signal="animation_finished" from="KinematicBody2D/AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 0, -4 )
+shape = SubResource( 8 )
+
+[node name="ThrowPoint" type="Position2D" parent="."]
+position = Vector2( 0, -30 )
+
+[node name="Monke" type="Sprite" parent="."]
+texture = ExtResource( 1 )
+hframes = 6
+vframes = 3
+frame = 7
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Monke"]
+anims/catch = SubResource( 12 )
+anims/run = SubResource( 9 )
+anims/sit = SubResource( 10 )
+anims/throw = SubResource( 11 )
+
+[node name="CatchArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CatchArea"]
+position = Vector2( 0, -30 )
+shape = SubResource( 13 )
+
 [connection signal="timeout" from="ThrowCooldown" to="." method="_on_ThrowCooldown_timeout"]
+[connection signal="animation_finished" from="Monke/AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
+[connection signal="area_entered" from="CatchArea" to="." method="_on_CatchArea_area_entered"]
+[connection signal="body_entered" from="CatchArea" to="." method="_on_CatchArea_body_entered"]

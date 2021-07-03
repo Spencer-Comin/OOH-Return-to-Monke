@@ -1,24 +1,21 @@
-extends Node2D
+extends KinematicBody2D
 
 export (PackedScene) var Banan
 
 var velocity
 export var speed = 2
+export var throw_speed = 15
 var screen_size
 var throwing = false
 var can_throw = true
 var cooldown_time = 2
+var catch_obj
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	screen_size = get_viewport_rect().size
-	$KinematicBody2D/AnimationPlayer.play("sit")
-	
-
-func start(x, y):
-	position.x = x
-	position.y = y
+	$Monke/AnimationPlayer.play("sit")
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -35,13 +32,12 @@ func _process(delta):
 		velocity.y = 1
 
 	if Input.is_action_just_pressed("throw") and can_throw:
-		$KinematicBody2D/AnimationPlayer.play("throw")
+		$Monke/AnimationPlayer.play("throw")
 	elif velocity.length() > 0 and not throwing:
-		$KinematicBody2D.rotation = velocity.angle() + PI/2
+		rotation = velocity.angle() + PI/2
 		velocity = velocity.normalized() * speed
-		$KinematicBody2D.move_and_collide(velocity)
-		position = $KinematicBody2D.position
-		$KinematicBody2D/AnimationPlayer.play("run")
+		move_and_collide(velocity)
+		$Monke/AnimationPlayer.play("run")
 
 
 func throw():
@@ -53,7 +49,9 @@ func throw():
 	
 	var b = Banan.instance()
 	owner.add_child(b)
-	b.transform = $KinematicBody2D/ThrowPoint.global_transform
+	var angle = rotation - PI/2
+	b.velocity = Vector2(cos(angle), sin(angle)) * throw_speed
+	b.transform = $ThrowPoint.global_transform
 
 
 func _on_ThrowCooldown_timeout():
@@ -63,3 +61,14 @@ func _on_ThrowCooldown_timeout():
 
 func _on_AnimationPlayer_animation_finished(anim_name):
 	throwing = false
+
+
+func _on_CatchArea_body_entered(body):
+	if body.is_in_group("Banan") and body.alive_time > 1:
+		$Monke/AnimationPlayer.play("catch")
+		body.velocity = Vector2.ZERO
+		catch_obj = body
+		
+
+func remove_catch_obj():
+	catch_obj.queue_free()
