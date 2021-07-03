@@ -7,13 +7,13 @@ export var speed = 2
 var screen_size
 var throwing = false
 var can_throw = true
-var cooldown_time = 4
+var cooldown_time = 2
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	screen_size = get_viewport_rect().size
-	$KinematicBody2D/AnimatedSprite.animation = "stop"
+	$KinematicBody2D/AnimationPlayer.play("sit")
 	
 
 func start(x, y):
@@ -34,14 +34,14 @@ func _process(delta):
 	elif Input.is_action_pressed("ui_down"):
 		velocity.y = 1
 
-	if Input.is_key_pressed(KEY_SPACE) and can_throw:
-		throw()
+	if Input.is_action_just_pressed("throw") and can_throw:
+		$KinematicBody2D/AnimationPlayer.play("throw")
 	elif velocity.length() > 0 and not throwing:
 		$KinematicBody2D.rotation = velocity.angle() + PI/2
 		velocity = velocity.normalized() * speed
 		$KinematicBody2D.move_and_collide(velocity)
 		position = $KinematicBody2D.position
-		$KinematicBody2D/AnimatedSprite.play("run")
+		$KinematicBody2D/AnimationPlayer.play("run")
 
 
 func throw():
@@ -50,21 +50,16 @@ func throw():
 	can_throw = false
 	$ThrowCooldown.start(cooldown_time)
 	print("starting cooldown")
-	$KinematicBody2D/AnimatedSprite.play("throw")
+	
 	var b = Banan.instance()
 	owner.add_child(b)
 	b.transform = $KinematicBody2D/ThrowPoint.global_transform
-	var angle = $KinematicBody2D.rotation - PI/2
-	b.velocity = Vector2(cos(angle), sin(angle)) * b.speed
-	b.show()
-
-
-func _on_AnimatedSprite_animation_finished():
-	$KinematicBody2D/AnimatedSprite.animation = "stop"
-	$KinematicBody2D/AnimatedSprite.stop()
-	throwing = false
 
 
 func _on_ThrowCooldown_timeout():
 	can_throw = true
 	print("cooldown done")
+
+
+func _on_AnimationPlayer_animation_finished(anim_name):
+	throwing = false
