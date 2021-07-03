@@ -105,6 +105,9 @@ radius = 20.5045
 
 [node name="Player" type="KinematicBody2D"]
 script = ExtResource( 2 )
+__meta__ = {
+"_edit_group_": true
+}
 Banan = ExtResource( 4 )
 
 [node name="ThrowCooldown" type="Timer" parent="."]
