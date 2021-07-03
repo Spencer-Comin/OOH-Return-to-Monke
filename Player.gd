@@ -20,6 +20,8 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	var animation = "sit"
+	
 	velocity = Vector2.ZERO
 	
 	if Input.is_action_pressed("ui_right"):
@@ -32,21 +34,19 @@ func _process(delta):
 		velocity.y = 1
 
 	if Input.is_action_just_pressed("throw") and can_throw:
+		throwing = true
+		can_throw = false
+		$ThrowCooldown.start(cooldown_time)
 		$Monke/AnimationPlayer.play("throw")
-	elif velocity.length() > 0 and not throwing:
+	if velocity.length() > 0:
 		rotation = velocity.angle() + PI/2
 		velocity = velocity.normalized() * speed
 		move_and_collide(velocity)
-		$Monke/AnimationPlayer.play("run")
+		if not throwing:
+			$Monke/AnimationPlayer.play("run")
 
 
 func throw():
-	print("throwing banan")
-	throwing = true
-	can_throw = false
-	$ThrowCooldown.start(cooldown_time)
-	print("starting cooldown")
-	
 	var b = Banan.instance()
 	owner.add_child(b)
 	var angle = rotation - PI/2
