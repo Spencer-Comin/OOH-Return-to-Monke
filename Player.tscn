@@ -1,8 +1,9 @@
-[gd_scene load_steps=24 format=2]
+[gd_scene load_steps=25 format=2]
 
 [ext_resource path="res://monke_spritesheets/monke_run.png" type="Texture" id=1]
 [ext_resource path="res://Player.gd" type="Script" id=2]
 [ext_resource path="res://monke_spritesheets/monke_throw.png" type="Texture" id=3]
+[ext_resource path="res://Banan.tscn" type="PackedScene" id=4]
 
 [sub_resource type="CapsuleShape2D" id=1]
 height = 7.74012
@@ -99,6 +100,7 @@ animations = [ {
 
 [node name="Player" type="Node2D"]
 script = ExtResource( 2 )
+Banan = ExtResource( 4 )
 
 [node name="KinematicBody2D" type="KinematicBody2D" parent="."]
 
@@ -110,3 +112,14 @@ shape = SubResource( 1 )
 frames = SubResource( 9 )
 animation = "stop"
 playing = true
+
+[node name="ThrowPoint" type="Position2D" parent="KinematicBody2D"]
+position = Vector2( 0, -30 )
+
+[node name="ThrowCooldown" type="Timer" parent="."]
+wait_time = 4.0
+one_shot = true
+
+[connection signal="animation_finished" from="KinematicBody2D/AnimatedSprite" to="." method="_on_AnimatedSprite_animation_finished"]
+[connection signal="frame_changed" from="KinematicBody2D/AnimatedSprite" to="." method="_on_AnimatedSprite_frame_changed"]
+[connection signal="timeout" from="ThrowCooldown" to="." method="_on_ThrowCooldown_timeout"]
