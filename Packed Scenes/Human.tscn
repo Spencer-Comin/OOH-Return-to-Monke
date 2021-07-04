@@ -25,6 +25,7 @@ tracks/0/keys = {
 [sub_resource type="Animation" id=3]
 resource_name = "walk"
 length = 0.666667
+loop = true
 step = 0.0833333
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:frame")
@@ -43,10 +44,13 @@ tracks/0/keys = {
 radius = 12.0
 
 [node name="Human" type="KinematicBody2D"]
+position = Vector2( -1, 0 )
 collision_layer = 8
 collision_mask = 18
 script = ExtResource( 1 )
 smol_monke = ExtResource( 3 )
+speed = 50
+pause_time = 0.8
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )
@@ -55,6 +59,7 @@ shape = SubResource( 1 )
 texture = ExtResource( 2 )
 vframes = 3
 hframes = 3
+frame = 7
 
 [node name="Anim" type="AnimationPlayer" parent="Sprite"]
 autoplay = "stand"
@@ -65,4 +70,12 @@ anims/walk = SubResource( 3 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="hitbox"]
 shape = SubResource( 4 )
+
+[node name="navPoints" type="Node2D" parent="."]
+
+[node name="point1" type="Node2D" parent="navPoints"]
+position = Vector2( 0, 50 )
+
+[node name="point2" type="Node2D" parent="navPoints"]
+position = Vector2( 0, -50 )
 [connection signal="body_entered" from="hitbox" to="." method="_on_hitbox_body_entered"]

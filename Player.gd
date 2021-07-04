@@ -57,7 +57,7 @@ func throw():
 
 
 func _on_ThrowCooldown_timeout():
-	can_throw = true
+	# can_throw = true
 	print("cooldown done")
 
 
@@ -76,3 +76,4 @@ func _on_CatchArea_body_entered(body):
 func remove_catch_obj():
 	catch_obj.queue_free()
 	catching = false
+	can_throw = true

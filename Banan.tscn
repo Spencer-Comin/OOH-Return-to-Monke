@@ -5,9 +5,9 @@
 
 [sub_resource type="Animation" id=1]
 resource_name = "spin"
-length = 0.266667
+length = 0.222222
 loop = true
-step = 0.0666667
+step = 0.0555556
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
 tracks/0/interp = 1
@@ -15,7 +15,7 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.0666667, 0.133333, 0.2 ),
+"times": PoolRealArray( 0, 0.0555556, 0.111111, 0.166667 ),
 "transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 1,
 "values": [ 0, 1, 2, 3 ]
@@ -28,14 +28,13 @@ radius = 11.2133
 "Banan",
 ]]
 collision_layer = 16
-collision_mask = 9
+collision_mask = 11
 script = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 1 )
 vframes = 2
 hframes = 2
-frame = 3
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/spin = SubResource( 1 )
@@ -48,5 +47,4 @@ scale = Vector2( 0.717761, 0.746671 )
 "Banan",
 ]]
 shape = SubResource( 2 )
-[connection signal="body_entered" from="." to="." method="_on_Banan_body_entered"]
 [connection signal="screen_exited" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_exited"]

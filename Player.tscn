@@ -5,8 +5,8 @@
 [ext_resource path="res://Banan.tscn" type="PackedScene" id=4]
 
 [sub_resource type="CapsuleShape2D" id=1]
-radius = 6.97476
-height = 11.1417
+radius = 6.0
+height = 10.0
 
 [sub_resource type="Animation" id=2]
 resource_name = "catch"

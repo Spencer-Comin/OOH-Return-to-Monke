@@ -6,15 +6,48 @@ extends KinematicBody2D
 # var b = "text"
 
 export var smol_monke: PackedScene
+export var speed: int
+export var pause_time: float
+
+var nav_points
+var target_point
+var nav_index: int = 0
+
+var timer: float = 0
+var velocity = Vector2.ZERO
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	nav_points = $navPoints.get_children()
+	target_point = nav_points[0].position
+	rotation = (target_point - position).angle()
+	velocity = (target_point - position).normalized() * speed
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
+func _physics_process(delta):
+	if position.distance_to(target_point) >= speed * delta:
+		move_and_slide(velocity)
+	if position.distance_to(target_point) < speed * delta:
+		if timer == 0:
+			$Sprite/Anim.play("stand")
+		timer += delta
+		if timer > pause_time:
+			switch_target_point()
+
+
+func switch_target_point():
+	nav_index += 1
+	if nav_index >= nav_points.size():
+		nav_index = 0
+	
+	target_point = nav_points[nav_index].position
+	rotation = (target_point - position).angle() - PI / 2
+	velocity = (target_point - position).normalized() * speed
+
+	timer = 0
+	$Sprite/Anim.play("walk")
+
 
 func _on_hitbox_body_entered(body):
 	if body.is_in_group("Banan"):
