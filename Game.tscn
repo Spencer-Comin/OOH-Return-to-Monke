@@ -16,7 +16,7 @@
 [ext_resource path="res://Sprites/tiles/grass_tileset.png" type="Texture" id=14]
 [ext_resource path="res://Sprites/tiles/tree.png" type="Texture" id=15]
 [ext_resource path="res://fonts/font_asset.tres" type="DynamicFont" id=16]
-[ext_resource path="res://Audio/ReturnToMonke_ScuffyBGM_Normalized.wav" type="AudioStream" id=17]
+[ext_resource path="res://Audio/ReturnToMonke_ScuffyBGM_WithBongos_Normalized.wav" type="AudioStream" id=17]
 [ext_resource path="res://timer.gd" type="Script" id=18]
 [ext_resource path="res://fonts/pixel.ttf" type="DynamicFontData" id=19]
 [ext_resource path="res://fonts/big font.tres" type="DynamicFont" id=20]
@@ -781,7 +781,7 @@ script = ExtResource( 2 )
 
 [node name="Main theme" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 17 )
-volume_db = -18.0
+volume_db = -16.0
 autoplay = true
 
 [node name="city noises" type="AudioStreamPlayer2D" parent="."]
@@ -1047,7 +1047,8 @@ position = Vector2( 423.955, 749.134 )
 position = Vector2( 703.419, 280.587 )
 
 [node name="Human9" parent="." instance=ExtResource( 12 )]
-position = Vector2( 291.953, 198.531 )
+position = Vector2( 291.953, 174.558 )
+rotation = 1.56336
 
 [node name="Human10" parent="." instance=ExtResource( 12 )]
 position = Vector2( 582.119, 66.5295 )
@@ -1094,3 +1095,11 @@ position = Vector2( 882.989, 309.128 )
 [node name="Human23" parent="." instance=ExtResource( 12 )]
 position = Vector2( 768.825, 373.345 )
 rotation = 1.50569
+
+[node name="Human24" parent="." instance=ExtResource( 12 )]
+position = Vector2( 970.347, 801.861 )
+rotation = 1.50569
+
+[node name="Human25" parent="." instance=ExtResource( 12 )]
+position = Vector2( -90.6526, 798.861 )
+rotation = -1.59235
