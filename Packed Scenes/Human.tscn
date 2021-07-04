@@ -5,7 +5,7 @@
 [ext_resource path="res://Packed Scenes/Smol monke.tscn" type="PackedScene" id=3]
 
 [sub_resource type="CircleShape2D" id=1]
-radius = 4.022
+radius = 8.37142
 
 [sub_resource type="Animation" id=2]
 resource_name = "stand"
@@ -41,20 +41,21 @@ tracks/0/keys = {
 }
 
 [sub_resource type="CircleShape2D" id=4]
-radius = 12.0
+radius = 17.1409
 
 [node name="Human" type="KinematicBody2D" groups=[
 "humans",
 ]]
 position = Vector2( -1, 0 )
 collision_layer = 8
-collision_mask = 18
+collision_mask = 22
 script = ExtResource( 1 )
 smol_monke = ExtResource( 3 )
 speed = 50
 pause_time = 0.8
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 0.420921, 6.94522 )
 shape = SubResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="."]
@@ -69,6 +70,7 @@ anims/stand = SubResource( 2 )
 anims/walk = SubResource( 3 )
 
 [node name="hitbox" type="Area2D" parent="."]
+position = Vector2( 0.561234, -0.210461 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="hitbox"]
 shape = SubResource( 4 )

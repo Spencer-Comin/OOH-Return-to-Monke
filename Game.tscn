@@ -1,4 +1,4 @@
-[gd_scene load_steps=59 format=2]
+[gd_scene load_steps=60 format=2]
 
 [ext_resource path="res://Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Game.gd" type="Script" id=2]
@@ -16,6 +16,7 @@
 [ext_resource path="res://Sprites/tiles/grass_tileset.png" type="Texture" id=14]
 [ext_resource path="res://Sprites/tiles/tree.png" type="Texture" id=15]
 [ext_resource path="res://fonts/font_asset.tres" type="DynamicFont" id=16]
+[ext_resource path="res://Audio/ReturnToMonke_ScuffyBGM_Normalized.wav" type="AudioStream" id=17]
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
 points = PoolVector2Array( 0, 0, 0, 0, 0, 0, 0, 0 )
@@ -755,6 +756,10 @@ polygon = PoolVector2Array( 16, 0, 16, 0, 32, 16, 16, 32, 0, 16, 16, 0 )
 
 [node name="Main" type="Node"]
 script = ExtResource( 2 )
+
+[node name="Main theme" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 17 )
+autoplay = true
 
 [node name="Ground" type="TileMap" parent="."]
 z_index = -10

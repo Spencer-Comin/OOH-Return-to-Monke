@@ -16,7 +16,7 @@ func _physics_process(delta):
 	velocity += acceleration
 	velocity *= 1 - air_friction
 	# position += velocity
-	move_and_slide(velocity)
+	velocity = move_and_slide(velocity)
 
 
 func _on_VisibilityNotifier2D_screen_exited():

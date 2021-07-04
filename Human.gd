@@ -30,6 +30,8 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
 	if position.distance_to(target_point) >= speed * delta:
+		rotation = (target_point - position).angle() - PI / 2
+		velocity = (target_point - position).normalized() * speed
 		move_and_slide(velocity)
 	if position.distance_to(target_point) < speed * delta:
 		if timer == 0:
