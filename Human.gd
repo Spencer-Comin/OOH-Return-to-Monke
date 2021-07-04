@@ -54,7 +54,6 @@ func _on_hitbox_body_entered(body):
 		var m = smol_monke.instance()
 		owner.add_child(m)
 		m.transform = global_transform
-
 		var vel = body.velocity
 		var diff = body.position - position
 		body.velocity = vel.reflect(diff) * 2
