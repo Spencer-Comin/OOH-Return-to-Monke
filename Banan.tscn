@@ -47,4 +47,5 @@ scale = Vector2( 0.717761, 0.746671 )
 ]]
 shape = SubResource( 2 )
 
+[connection signal="body_entered" from="." to="." method="_on_Banan_body_entered"]
 [connection signal="screen_exited" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_exited"]
