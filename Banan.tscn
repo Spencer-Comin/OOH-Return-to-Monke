@@ -27,12 +27,14 @@ radius = 11.2133
 [node name="Banan" type="RigidBody2D" groups=[
 "Banan",
 ]]
+collision_layer = 16
+collision_mask = 9
 script = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 1 )
-hframes = 2
 vframes = 2
+hframes = 2
 frame = 3
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -46,6 +48,5 @@ scale = Vector2( 0.717761, 0.746671 )
 "Banan",
 ]]
 shape = SubResource( 2 )
-
 [connection signal="body_entered" from="." to="." method="_on_Banan_body_entered"]
 [connection signal="screen_exited" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_exited"]

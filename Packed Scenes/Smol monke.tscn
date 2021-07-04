@@ -1,0 +1,63 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Smol monke.gd" type="Script" id=1]
+[ext_resource path="res://monke_spritesheets/smol monke run.png" type="Texture" id=2]
+
+[sub_resource type="CapsuleShape2D" id=4]
+radius = 5.0
+height = 8.0
+
+[sub_resource type="Animation" id=2]
+resource_name = "run"
+length = 0.444444
+step = 0.0555556
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.0555556, 0.111111, 0.166667, 0.222222, 0.277778, 0.333333, 0.388889 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2, 3, 4, 5, 6, 7 ]
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "stand"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 0 ]
+}
+
+[node name="Smol monke" type="KinematicBody2D"]
+collision_layer = 4
+collision_mask = 6
+script = ExtResource( 1 )
+follow_speed = 30.0
+follow_distance = 45.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( 0, -2 )
+shape = SubResource( 4 )
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 2 )
+vframes = 3
+hframes = 3
+frame = 7
+
+[node name="Anim" type="AnimationPlayer" parent="Sprite"]
+autoplay = "stand"
+anims/run = SubResource( 2 )
+anims/stand = SubResource( 3 )

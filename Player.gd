@@ -8,6 +8,7 @@ export var throw_speed = 15
 var screen_size
 var throwing = false
 var can_throw = true
+var catching = false
 var cooldown_time = 2
 var catch_obj
 
@@ -24,14 +25,15 @@ func _process(delta):
 	
 	velocity = Vector2.ZERO
 	
-	if Input.is_action_pressed("ui_right"):
-		velocity.x = 1
-	elif Input.is_action_pressed("ui_left"):
-		velocity.x = -1
-	if Input.is_action_pressed("ui_up"):
-		velocity.y = -1
-	elif Input.is_action_pressed("ui_down"):
-		velocity.y = 1
+	if !catching and !throwing:
+		if Input.is_action_pressed("ui_right"):
+			velocity.x = 1
+		elif Input.is_action_pressed("ui_left"):
+			velocity.x = -1
+		if Input.is_action_pressed("ui_up"):
+			velocity.y = -1
+		elif Input.is_action_pressed("ui_down"):
+			velocity.y = 1
 
 	if Input.is_action_just_pressed("throw") and can_throw:
 		throwing = true
@@ -41,7 +43,7 @@ func _process(delta):
 	if velocity.length() > 0:
 		rotation = velocity.angle() + PI/2
 		velocity = velocity.normalized() * speed
-		move_and_collide(velocity)
+		move_and_slide(velocity)
 		if not throwing:
 			$Monke/AnimationPlayer.play("run")
 
@@ -64,11 +66,13 @@ func _on_AnimationPlayer_animation_finished(anim_name):
 
 
 func _on_CatchArea_body_entered(body):
-	if body.is_in_group("Banan") and body.alive_time > 1:
+	if body.is_in_group("Banan") and body.alive_time > .1:
 		$Monke/AnimationPlayer.play("catch")
 		body.velocity = Vector2.ZERO
 		catch_obj = body
+		catching = true
 		
 
 func remove_catch_obj():
 	catch_obj.queue_free()
+	catching = false
