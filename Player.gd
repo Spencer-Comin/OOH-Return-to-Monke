@@ -24,6 +24,7 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	var animation = "sit"
+	$Monke.modulate = $Monke.modulate.linear_interpolate(Color.white, 0.1)
 	
 	# velocity = Vector2.ZERO
 	var vel = Vector2.ZERO
@@ -45,7 +46,7 @@ func _process(delta):
 		$Monke/AnimationPlayer.play("throw")
 	# if vel.length() > 0:
 	vel = vel.normalized() * speed
-	velocity = velocity.linear_interpolate(vel, 0.2)
+	velocity = velocity.linear_interpolate(vel, 0.15)
 
 	rotation = velocity.angle() + PI/2
 	move_and_slide(velocity)
@@ -89,3 +90,9 @@ func remove_catch_obj():
 	catching = false
 	can_throw = true
 	b = true
+
+
+func get_smacked(point):
+	velocity = (position - point).normalized() * speed * 5
+	$Monke.modulate = Color(.3, 0, 0)
+	$hit.play()

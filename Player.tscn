@@ -1,8 +1,11 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://monke_spritesheets/monke_spritesheet.png" type="Texture" id=1]
 [ext_resource path="res://Player.gd" type="Script" id=2]
+[ext_resource path="res://Audio/footstep1.wav" type="AudioStream" id=3]
 [ext_resource path="res://Banan.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Audio/footstep2.wav" type="AudioStream" id=5]
+[ext_resource path="res://Audio/hit.wav" type="AudioStream" id=6]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 6.0
@@ -54,6 +57,30 @@ tracks/0/keys = {
 "update": 1,
 "values": [ 5, 6, 0, 1, 2, 3, 4 ]
 }
+tracks/1/type = "value"
+tracks/1/path = NodePath("../footsep fx 1:playing")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.222222 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("../footsep fx 2:playing")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0.333333 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
 
 [sub_resource type="Animation" id=4]
 length = 0.1
@@ -104,7 +131,7 @@ tracks/1/keys = {
 radius = 16.1979
 
 [node name="Player" type="KinematicBody2D"]
-collision_mask = 18
+collision_mask = 26
 script = ExtResource( 2 )
 __meta__ = {
 "_edit_group_": true
@@ -128,7 +155,7 @@ position = Vector2( 7.75873, -24.6607 )
 texture = ExtResource( 1 )
 vframes = 3
 hframes = 6
-frame = 8
+frame = 4
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Monke"]
 anims/catch = SubResource( 2 )
@@ -145,6 +172,19 @@ shape = SubResource( 6 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
 current = true
+
+[node name="footsep fx 1" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 3 )
+volume_db = -26.0
+
+[node name="footsep fx 2" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 5 )
+volume_db = -32.0
+
+[node name="hit" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 6 )
+volume_db = 6.0
+pitch_scale = 0.8
 [connection signal="timeout" from="ThrowCooldown" to="." method="_on_ThrowCooldown_timeout"]
 [connection signal="animation_finished" from="Monke/AnimationPlayer" to="." method="_on_AnimationPlayer_animation_finished"]
 [connection signal="area_entered" from="CatchArea" to="." method="_on_CatchArea_area_entered"]

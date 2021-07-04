@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/brids2.wav-e11675de7d8e6a48631b185a1f74e77a.sample"
+
+[deps]
+
+source_file="res://Audio/brids2.wav"
+dest_files=[ "res://.import/brids2.wav-e11675de7d8e6a48631b185a1f74e77a.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=true
+compress/mode=0

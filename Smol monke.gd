@@ -90,7 +90,6 @@ func _calculate_roam_point(polygon):
 	return (n1 * triangle[0]) + (n2 * triangle[1]) + (n3 * triangle[2])
 
 func switch_wander_point():
-	print("wander point altered")
 	wander_index += 1;
 	if wander_index >= wander_points.size():
 		wander_index = 0

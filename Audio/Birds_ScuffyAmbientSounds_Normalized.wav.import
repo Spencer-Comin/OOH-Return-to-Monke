@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/Birds_ScuffyAmbientSounds_Normalized.wav-0c609830d66005cfb905c584a5902fdb.sample"
+
+[deps]
+
+source_file="res://Audio/Birds_ScuffyAmbientSounds_Normalized.wav"
+dest_files=[ "res://.import/Birds_ScuffyAmbientSounds_Normalized.wav-0c609830d66005cfb905c584a5902fdb.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=true
+compress/mode=0

@@ -65,3 +65,5 @@ func _on_hitbox_body_entered(body):
 		body.alive_time += 1
 
 		queue_free()
+	if body.name == "Player":
+		body.get_smacked(position)

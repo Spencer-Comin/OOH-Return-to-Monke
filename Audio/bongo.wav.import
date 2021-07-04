@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/bongo.wav-b05b7e1fbf536d9829cf83faa90cc149.sample"
+
+[deps]
+
+source_file="res://Audio/bongo.wav"
+dest_files=[ "res://.import/bongo.wav-b05b7e1fbf536d9829cf83faa90cc149.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0
