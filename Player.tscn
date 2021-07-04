@@ -111,7 +111,7 @@ __meta__ = {
 }
 Banan = ExtResource( 4 )
 speed = 5
-throw_speed = 320
+throw_speed = 360
 
 [node name="ThrowCooldown" type="Timer" parent="."]
 wait_time = 4.0

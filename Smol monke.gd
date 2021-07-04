@@ -22,6 +22,7 @@ export var pause_time: float = 1
 func _ready():
 	follow_target = get_node("../Player")
 	connect("area_entered", $Area2D, "_on_Area2D_area_entered")
+	$particles.emitting = true
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(_delta):
