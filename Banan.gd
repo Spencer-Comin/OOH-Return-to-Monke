@@ -1,7 +1,7 @@
 extends RigidBody2D
 
 
-var player_attraction = 0.5
+var player_attraction = 0.3
 var velocity = Vector2.ZERO
 export var alive_time = 0
 var air_friction = 0.01

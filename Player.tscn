@@ -101,7 +101,7 @@ tracks/1/keys = {
 }
 
 [sub_resource type="CircleShape2D" id=6]
-radius = 20.5045
+radius = 7.0
 
 [node name="Player" type="KinematicBody2D"]
 collision_mask = 18
@@ -111,6 +111,7 @@ __meta__ = {
 }
 Banan = ExtResource( 4 )
 speed = 5
+throw_speed = 8
 
 [node name="ThrowCooldown" type="Timer" parent="."]
 wait_time = 4.0
@@ -136,10 +137,10 @@ anims/sit = SubResource( 4 )
 anims/throw = SubResource( 5 )
 
 [node name="CatchArea" type="Area2D" parent="."]
-position = Vector2( 7.6753, 5.25591 )
+position = Vector2( 7.75873, -21.1071 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CatchArea"]
-position = Vector2( 0, -30 )
+position = Vector2( 0, 0.117214 )
 shape = SubResource( 6 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
