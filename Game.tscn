@@ -781,13 +781,13 @@ script = ExtResource( 2 )
 
 [node name="Main theme" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 17 )
-volume_db = -16.0
+volume_db = -8.0
 autoplay = true
 
 [node name="city noises" type="AudioStreamPlayer2D" parent="."]
 position = Vector2( -336, -498 )
 stream = ExtResource( 23 )
-volume_db = -10.0
+volume_db = -14.0
 autoplay = true
 max_distance = 2200.0
 attenuation = 0.482968
@@ -843,7 +843,7 @@ __meta__ = {
 [node name="bird sounds" type="AudioStreamPlayer2D" parent="MonkeHome"]
 position = Vector2( 2054.18, 379.072 )
 stream = ExtResource( 21 )
-volume_db = 20.0
+volume_db = 12.0
 autoplay = true
 max_distance = 1600.0
 attenuation = 0.450625
@@ -851,7 +851,7 @@ attenuation = 0.450625
 [node name="bird sounds2" type="AudioStreamPlayer2D" parent="MonkeHome"]
 position = Vector2( 2286.42, 701.208 )
 stream = ExtResource( 22 )
-volume_db = 20.0
+volume_db = 12.0
 autoplay = true
 max_distance = 1600.0
 attenuation = 0.450625
@@ -859,7 +859,7 @@ attenuation = 0.450625
 [node name="bird sounds3" type="AudioStreamPlayer2D" parent="MonkeHome"]
 position = Vector2( 2286.42, 701.208 )
 stream = ExtResource( 24 )
-volume_db = -6.0
+volume_db = -18.0
 autoplay = true
 max_distance = 1200.0
 attenuation = 0.870551
