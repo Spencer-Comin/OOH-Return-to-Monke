@@ -5,7 +5,7 @@
 [ext_resource path="res://Packed Scenes/Smol monke.tscn" type="PackedScene" id=3]
 
 [sub_resource type="CircleShape2D" id=1]
-radius = 8.0
+radius = 4.022
 
 [sub_resource type="Animation" id=2]
 resource_name = "stand"
@@ -70,12 +70,4 @@ anims/walk = SubResource( 3 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="hitbox"]
 shape = SubResource( 4 )
-
-[node name="navPoints" type="Node2D" parent="."]
-
-[node name="point1" type="Node2D" parent="navPoints"]
-position = Vector2( 0, 50 )
-
-[node name="point2" type="Node2D" parent="navPoints"]
-position = Vector2( 0, -50 )
 [connection signal="body_entered" from="hitbox" to="." method="_on_hitbox_body_entered"]

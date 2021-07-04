@@ -9,8 +9,10 @@ var screen_size
 var throwing = false
 var can_throw = true
 var catching = false
-var cooldown_time = 2
+var cooldown_time = 5
 var catch_obj
+
+var b = true
 
 
 # Called when the node enters the scene tree for the first time.
@@ -57,10 +59,11 @@ func throw():
 	var angle = rotation - PI/2
 	b.velocity = Vector2(cos(angle), sin(angle)) * throw_speed
 	b.transform = $ThrowPoint.global_transform
+	b = true
 
 
 func _on_ThrowCooldown_timeout():
-	# can_throw = true
+	remove_catch_obj()
 	print("cooldown done")
 
 
@@ -69,7 +72,10 @@ func _on_AnimationPlayer_animation_finished(anim_name):
 
 
 func _on_CatchArea_body_entered(body):
-	if body.is_in_group("Banan") and body.alive_time > .1:
+	if body.is_in_group("Banan"):# and body.alive_time > .1:
+		if b:
+			b = false
+			return
 		$Monke/AnimationPlayer.play("catch")
 		body.velocity = Vector2.ZERO
 		catch_obj = body
@@ -77,6 +83,9 @@ func _on_CatchArea_body_entered(body):
 		
 
 func remove_catch_obj():
+	if !is_instance_valid(catch_obj):
+		return
 	catch_obj.queue_free()
 	catching = false
 	can_throw = true
+	b = true

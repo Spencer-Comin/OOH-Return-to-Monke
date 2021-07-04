@@ -1,7 +1,7 @@
-extends RigidBody2D
+extends KinematicBody2D
 
 
-var player_attraction = 0.3
+var player_attraction = 15
 var velocity = Vector2.ZERO
 export var alive_time = 0
 var air_friction = 0.01
@@ -15,7 +15,8 @@ func _physics_process(delta):
 	var acceleration = ($"../Player/ThrowPoint".global_position - position).normalized() * player_attraction
 	velocity += acceleration
 	velocity *= 1 - air_friction
-	position += velocity
+	# position += velocity
+	move_and_slide(velocity)
 
 
 func _on_VisibilityNotifier2D_screen_exited():

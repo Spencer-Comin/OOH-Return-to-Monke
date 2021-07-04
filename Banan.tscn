@@ -22,9 +22,9 @@ tracks/0/keys = {
 }
 
 [sub_resource type="CircleShape2D" id=2]
-radius = 11.2133
+radius = 5.79595
 
-[node name="Banan" type="RigidBody2D" groups=[
+[node name="Banan" type="KinematicBody2D" groups=[
 "Banan",
 ]]
 collision_layer = 16

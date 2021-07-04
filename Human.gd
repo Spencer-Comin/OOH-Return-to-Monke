@@ -7,6 +7,7 @@ extends KinematicBody2D
 
 export var smol_monke: PackedScene
 export var speed: int
+export var roam_distance: float = 50
 export var pause_time: float
 
 var nav_points
@@ -18,8 +19,10 @@ var velocity = Vector2.ZERO
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	nav_points = $navPoints.get_children()
-	target_point = nav_points[0].position
+	nav_points = []
+	nav_points.append(position + (Vector2.UP.rotated(rotation)) * roam_distance)
+	nav_points.append(position - (Vector2.UP.rotated(rotation)) * roam_distance)
+	target_point = nav_points[0]
 	rotation = (target_point - position).angle()
 	velocity = (target_point - position).normalized() * speed
 
@@ -41,7 +44,7 @@ func switch_target_point():
 	if nav_index >= nav_points.size():
 		nav_index = 0
 	
-	target_point = nav_points[nav_index].position
+	target_point = nav_points[nav_index]
 	rotation = (target_point - position).angle() - PI / 2
 	velocity = (target_point - position).normalized() * speed
 
@@ -54,9 +57,9 @@ func _on_hitbox_body_entered(body):
 		var m = smol_monke.instance()
 		owner.add_child(m)
 		m.transform = global_transform
-		var vel = body.velocity
-		var diff = body.position - position
-		body.velocity = vel.reflect(diff) * 2
+		# var vel = body.velocity
+		# var diff = body.position - position
+		# body.velocity = vel.reflect(diff) * 2
 		body.alive_time += 1
 
 		queue_free()
