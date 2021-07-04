@@ -51,6 +51,7 @@ script = ExtResource( 1 )
 follow_speed = 30.0
 follow_distance = 45.0
 wander_point_count = 10
+pause_time = 1.5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0, -2 )
@@ -60,7 +61,6 @@ shape = SubResource( 1 )
 texture = ExtResource( 2 )
 vframes = 3
 hframes = 3
-frame = 7
 
 [node name="Anim" type="AnimationPlayer" parent="Sprite"]
 autoplay = "stand"

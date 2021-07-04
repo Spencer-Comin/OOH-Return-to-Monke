@@ -1,4 +1,4 @@
-[gd_scene load_steps=58 format=2]
+[gd_scene load_steps=59 format=2]
 
 [ext_resource path="res://Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Game.gd" type="Script" id=2]
@@ -15,6 +15,7 @@
 [ext_resource path="res://Sprites/tiles/umbrella.png" type="Texture" id=13]
 [ext_resource path="res://Sprites/tiles/grass_tileset.png" type="Texture" id=14]
 [ext_resource path="res://Sprites/tiles/tree.png" type="Texture" id=15]
+[ext_resource path="res://fonts/font_asset.tres" type="DynamicFont" id=16]
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
 points = PoolVector2Array( 0, 0, 0, 0, 0, 0, 0, 0 )
@@ -808,4 +809,40 @@ tile_data = PoolIntArray( -2555931, 536870916, 0, -2621411, 536870916, 0, -24903
 __meta__ = {
 "_edit_group_": true,
 "_edit_lock_": true
+}
+
+[node name="Move instructions" type="RichTextLabel" parent="."]
+margin_left = -34.6874
+margin_top = 6.37115
+margin_right = 66.3126
+margin_bottom = 46.3712
+custom_fonts/normal_font = ExtResource( 16 )
+text = "          Move:
+   W                     /\\
+ ASD     or     <  V  >"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Throw Instructions" type="RichTextLabel" parent="."]
+margin_left = -48.4743
+margin_top = 62.0676
+margin_right = 61.5257
+margin_bottom = 88.0676
+custom_fonts/normal_font = ExtResource( 16 )
+text = " Throw Bananarang:
+                Space"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Game Instrucitons" type="RichTextLabel" parent="."]
+margin_left = -37.519
+margin_top = 110.433
+margin_right = 63.481
+margin_bottom = 150.433
+custom_fonts/normal_font = ExtResource( 16 )
+text = "Help these sorry saps return to the glory of the monkey jungle"
+__meta__ = {
+"_edit_use_anchors_": false
 }

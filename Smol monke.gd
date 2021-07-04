@@ -9,12 +9,14 @@ var follow_target: KinematicBody2D
 var home_point: Vector2
 var wander_points
 var wander_index: int = 0
+var wander_timer: float = 0
 
 var dist_mod = 1.5
 export var follow_speed: float
 export var follow_distance: float
 export var home = false
 export var wander_point_count: int = 3
+export var pause_time: float = 1
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -32,8 +34,13 @@ func _physics_process(_delta):
 		dir = follow_target.position - position
 	else: # replace with some wander AI
 		if home_point.distance_to(position) < follow_speed * _delta:
-			switch_wander_point()
-		dir = home_point - position
+			dir = Vector2.ZERO
+
+			wander_timer += _delta
+			if wander_timer > pause_time:
+				switch_wander_point()
+		else:
+			dir = home_point - position
 	
 	rotation = dir.angle() + PI/2
 		
@@ -87,3 +94,5 @@ func switch_wander_point():
 	if wander_index >= wander_points.size():
 		wander_index = 0
 	home_point = wander_points[wander_index]
+
+	wander_timer = 0
