@@ -1,4 +1,4 @@
-[gd_scene load_steps=60 format=2]
+[gd_scene load_steps=66 format=2]
 
 [ext_resource path="res://Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Game.gd" type="Script" id=2]
@@ -17,6 +17,9 @@
 [ext_resource path="res://Sprites/tiles/tree.png" type="Texture" id=15]
 [ext_resource path="res://fonts/font_asset.tres" type="DynamicFont" id=16]
 [ext_resource path="res://Audio/ReturnToMonke_ScuffyBGM_Normalized.wav" type="AudioStream" id=17]
+[ext_resource path="res://timer.gd" type="Script" id=18]
+[ext_resource path="res://fonts/pixel.ttf" type="DynamicFontData" id=19]
+[ext_resource path="res://fonts/big font.tres" type="DynamicFont" id=20]
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
 points = PoolVector2Array( 0, 0, 0, 0, 0, 0, 0, 0 )
@@ -754,6 +757,21 @@ polygon = PoolVector2Array( 16, 0, 16, 0, 32, 16, 16, 32, 0, 16, 16, 0 )
 4/shapes = [  ]
 4/z_index = 0
 
+[sub_resource type="DynamicFont" id=43]
+size = 12
+outline_size = 1
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 19 )
+
+[sub_resource type="DynamicFont" id=44]
+size = 12
+outline_size = 1
+outline_color = Color( 0, 0, 0, 1 )
+font_data = ExtResource( 19 )
+
+[sub_resource type="QuadMesh" id=45]
+size = Vector2( 500, 300 )
+
 [node name="Main" type="Node"]
 script = ExtResource( 2 )
 
@@ -813,15 +831,16 @@ __meta__ = {
 follow_viewport_enable = true
 
 [node name="Move instructions" type="RichTextLabel" parent="Instructions"]
-margin_left = -34.6874
-margin_top = 6.37115
-margin_right = 66.3126
-margin_bottom = 46.3712
+margin_left = -200.857
+margin_top = 51.626
+margin_right = -99.8575
+margin_bottom = 91.626
 custom_fonts/normal_font = ExtResource( 16 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 0.388235 )
 custom_constants/shadow_offset_x = 2
 custom_constants/shadow_offset_y = 4
-text = "          Move:
+text = "
+          Move:
    W                     /\\
  ASD     or     <  V  >"
 scroll_active = false
@@ -830,15 +849,16 @@ __meta__ = {
 }
 
 [node name="Throw Instructions" type="RichTextLabel" parent="Instructions"]
-margin_left = -48.4743
-margin_top = 62.0676
-margin_right = 61.5257
-margin_bottom = 88.0676
+margin_left = -160.904
+margin_top = 89.6447
+margin_right = -50.9043
+margin_bottom = 115.645
 custom_fonts/normal_font = ExtResource( 16 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 0.388235 )
 custom_constants/shadow_offset_x = 2
 custom_constants/shadow_offset_y = 4
-text = " Throw Bananarang:
+text = "
+ Throw Bananarang:
                 Space"
 scroll_active = false
 __meta__ = {
@@ -846,17 +866,21 @@ __meta__ = {
 }
 
 [node name="Game Instrucitons" type="RichTextLabel" parent="Instructions"]
-margin_left = -54.0
-margin_top = 101.0
-margin_right = 106.0
-margin_bottom = 138.0
+margin_left = 75.0
+margin_top = 50.0
+margin_right = 265.0
+margin_bottom = 122.0
 custom_fonts/normal_font = ExtResource( 16 )
 custom_colors/font_color_shadow = Color( 0, 0, 0, 0.388235 )
 custom_constants/shadow_offset_x = 2
 custom_constants/shadow_offset_y = 4
-text = " Help these sorry saps
+text = "
+ Help these sorry saps
  return to the glory of the 
- monkey jungle"
+ monkey jungle
+
+          ----\\
+		                  \\ -->"
 scroll_active = false
 __meta__ = {
 "_edit_use_anchors_": false
@@ -880,10 +904,89 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="timer" type="RichTextLabel" parent="HUD"]
+margin_left = 224.739
+margin_top = -4.57379
+margin_right = 334.739
+margin_bottom = 31.4262
+custom_fonts/normal_font = SubResource( 43 )
+custom_constants/shadow_offset_x = 2
+custom_constants/shadow_offset_y = 4
+text = " 00 : 00 : 00"
+scroll_active = false
+script = ExtResource( 18 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Win Screen" type="CanvasLayer" parent="."]
+layer = 10
+
+[node name="vis_toggle" type="Node2D" parent="Win Screen"]
+visible = false
+
+[node name="Win Text" type="RichTextLabel" parent="Win Screen/vis_toggle"]
+margin_left = -2.17178
+margin_top = 10.1549
+margin_right = 378.828
+margin_bottom = 222.155
+custom_fonts/normal_font = ExtResource( 20 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 0.388235 )
+custom_constants/shadow_offset_x = 2
+custom_constants/shadow_offset_y = 4
+text = "
+ Congradulations!"
+scroll_active = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Win Text2" type="RichTextLabel" parent="Win Screen/vis_toggle"]
+margin_left = 18.7818
+margin_top = 56.4364
+margin_right = 373.782
+margin_bottom = 117.436
+custom_fonts/normal_font = SubResource( 44 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 0.388235 )
+custom_constants/shadow_offset_x = 2
+custom_constants/shadow_offset_y = 4
+text = "
+ you rescued all the poor humans
+ from *society* , and in only"
+scroll_active = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="time_display" type="RichTextLabel" parent="Win Screen/vis_toggle"]
+margin_left = 60.1912
+margin_top = 100.581
+margin_right = 270.191
+margin_bottom = 222.581
+custom_fonts/normal_font = ExtResource( 20 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 0.388235 )
+custom_constants/shadow_offset_x = 2
+custom_constants/shadow_offset_y = 4
+text = "
+ 00 : 00 : 00"
+scroll_active = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="background" type="MeshInstance2D" parent="Win Screen/vis_toggle"]
+modulate = Color( 0, 0, 0, 0.372549 )
+position = Vector2( 158.828, 91.4807 )
+z_index = -1
+mesh = SubResource( 45 )
+
 [node name="Player" parent="." instance=ExtResource( 1 )]
+position = Vector2( -175.363, 34.6482 )
 speed = 150
 
 [node name="Human" parent="." instance=ExtResource( 12 )]
+position = Vector2( -28.5771, 141.421 )
+rotation = -3.08167
 
 [node name="Human2" parent="." instance=ExtResource( 12 )]
 position = Vector2( -7.72729, -343.747 )
@@ -898,7 +1001,7 @@ position = Vector2( 226.546, 623.078 )
 position = Vector2( -249.136, 618.322 )
 
 [node name="Human6" parent="." instance=ExtResource( 12 )]
-position = Vector2( -250.326, 169.99 )
+position = Vector2( -273.661, 261.914 )
 
 [node name="Human7" parent="." instance=ExtResource( 12 )]
 position = Vector2( 423.955, 749.134 )

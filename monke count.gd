@@ -29,4 +29,9 @@ func count_home():
 		if x.home:
 			n += 1
 	
+	if n == total:
+		var node = get_node("../../Win Screen/vis_toggle")
+		node.visible = true
+		node.get_node("time_display").text = get_node("../timer").format_time()
+		get_node("../").queue_free()
 	return str(n)
